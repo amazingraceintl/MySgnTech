@@ -1,0 +1,20 @@
+component PR.AJAYI
+# Component Isolation Definition
+metamodelVersion 1.6
+# -------------------------------------------------
+
+
+private method tester (
+)
+{
+    jBC: TESTER
+}
+
+
+
+private method emLoanTester (
+)
+{
+   jBC: EM.LOAN.TESTER
+}
+

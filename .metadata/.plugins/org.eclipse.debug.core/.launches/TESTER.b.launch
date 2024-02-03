@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.temenos.tafj.launcher.BASICLauncherDelegate">
+<stringAttribute key="BASIC_PROGRAM" value="/MygenericTester/PR_AJAYI/Source/Private/TESTER.b"/>
+<stringAttribute key="BASIC_PROGRAM_ARGUMENTS" value=""/>
+<stringAttribute key="BASIC_PROJECT" value="MygenericTester"/>
+<stringAttribute key="UNIQUE_TARGET" value="/MygenericTester/PR_AJAYI/Source/Private/TESTER.b"/>
+</launchConfiguration>

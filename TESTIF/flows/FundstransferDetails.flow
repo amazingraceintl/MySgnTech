@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Flow xmlns:ns2="http://data.integrationflow.services.temenos.com/xsd">
+    <ApiFields/>
+    <Attributes/>
+    <BaseEvent>FUNDS.TRANSFER,</BaseEvent>
+    <CEGDefinitionList/>
+    <Companies/>
+    <IsComponentService>false</IsComponentService>
+    <CorrelationIdField></CorrelationIdField>
+    <ExitPointType>VERSION</ExitPointType>
+    <InputFields>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>id</DisplayName>
+            <FieldDescription></FieldDescription>
+            <FieldName>@ID</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditAcctNo</DisplayName>
+            <FieldDescription></FieldDescription>
+            <FieldName>CREDIT.ACCT.NO</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditAmount</DisplayName>
+            <FieldDescription></FieldDescription>
+            <FieldName>CREDIT.AMOUNT</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>debitAcctNo</DisplayName>
+            <FieldDescription></FieldDescription>
+            <FieldName>DEBIT.ACCT.NO</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>debitAmount</DisplayName>
+            <FieldDescription></FieldDescription>
+            <FieldName>DEBIT.AMOUNT</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+    </InputFields>
+    <flowName>FundstransferDetails</flowName>
+    <linkDefinitionList/>
+    <Parameter/>
+</Flow>

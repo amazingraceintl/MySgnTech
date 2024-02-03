@@ -1,0 +1,74 @@
+component TUCOOP.TRANSUNION
+# Component Isolation Definition 
+metamodelVersion 1.6
+# -------------------------------------------------
+
+private method OnlineProcess(IN args,OUT response){
+    jBC: SGNT.TU.API.CALL
+}
+
+private method GetEbParamList: return (IN parameterId, IN paramName,) {
+    jBC: SGNT.COMMON.GET.EB.PARAM.LIST 
+}
+
+private method LoadCreditCheck(){
+    jBC: SGNT.TU.CR.CHK
+}
+
+private method CreditCheckProcessLoad() {
+    jBC:SGNT.TU.ONLINE.PROCESS.LOAD
+}
+
+private method CreditCheckProcess
+(IN keyId string) 
+{
+    jBC: SGNT.TU.ONLINE.PROCESS
+}
+
+private method InvokeHttpClient(IN request, OUT response) 
+{
+    jBC: TU.INVOKE.HTTP.CLIENT
+}
+
+private method ParseXml: return(IN xmlopentag,IN xmlclosetag, IN xmlMessage) 
+{
+    jBC: SGNT.PARSE.XML
+}
+
+private method GetFicoScore: return(IN xmlMessage) 
+{
+    jBC: SGNT.GET.FICOSCORE
+}
+
+
+private method GetPersonNames: return(IN xmlMessage) 
+{
+    jBC: SGNT.GET.PERSON.NAMES
+}
+
+private method GetFileSummary: return(IN xmlMessage) 
+{ 
+    jBC: SGNT.GET.FILE.SUMMARY
+}
+
+private method GetSocialSecurity: return(IN xmlMessage) 
+{
+    jBC: SGNT.GET.SOCIAL.SECURITY
+}
+
+private method GetTotalSummary(IN xmlMessage, OUT TotalInquiryCount, OUT TotalHighCredit, OUT TotalCreditLimit, OUT TotalCurrentBalance, OUT TotalPastDue, OUT TotalMonthlyPayment) 
+{
+    jBC: SGNT.GET.TOTAL.SUMMARY
+}
+
+public property readwrite FnLoanApplFile
+public property readwrite FvLoanApplFile
+    
+
+
+private method sgntTuCreditchkService (
+)
+{
+   jBC: SGNT.TU.CREDITCHK.SERVICE
+}
+
