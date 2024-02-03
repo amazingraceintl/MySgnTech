@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Flow xmlns:ns2="http://data.integrationflow.services.temenos.com/xsd">
+    <ApiFields/>
+    <Attributes/>
+    <BaseEvent>FUNDS.TRANSFER,</BaseEvent>
+    <CEGDefinitionList/>
+    <Companies/>
+    <IsComponentService>false</IsComponentService>
+    <ExitPointType>VERSION</ExitPointType>
+    <InputFields>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditAcctNo</DisplayName>
+            <FieldName>CREDIT.ACCT.NO</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditAmount</DisplayName>
+            <FieldName>CREDIT.AMOUNT</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditCurrency</DisplayName>
+            <FieldName>CREDIT.CURRENCY</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditCustomer</DisplayName>
+            <FieldName>CREDIT.CUSTOMER</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>creditValueDate</DisplayName>
+            <FieldName>CREDIT.VALUE.DATE</FieldName>
+            <FieldType>date</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>debitAcctNo</DisplayName>
+            <FieldName>DEBIT.ACCT.NO</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>debitAmount</DisplayName>
+            <FieldName>DEBIT.AMOUNT</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>debitCurrency</DisplayName>
+            <FieldName>DEBIT.CURRENCY</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+        <Field xsi:type="applicationVersionField" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <DisplayName>id</DisplayName>
+            <FieldName>@ID</FieldName>
+            <FieldType>string</FieldType>
+            <multiVal>false</multiVal>
+            <PwActivityXmlName></PwActivityXmlName>
+            <selected>true</selected>
+        </Field>
+    </InputFields>
+    <flowName>FundsTransferDetails</flowName>
+    <linkDefinitionList/>
+    <Parameter/>
+</Flow>

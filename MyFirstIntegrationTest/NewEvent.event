@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Event>
+<projectName>MyFirstIntegrationTest</projectName>
+<ExitPointType xsi:type="aaActivityClass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></ExitPointType>
+<FlowName></FlowName>
+<Overrides>
+</Overrides>
+</Event>
