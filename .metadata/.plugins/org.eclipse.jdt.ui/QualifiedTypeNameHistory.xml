@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
+<fullyQualifiedTypeName name="java.security.KeyManagementException"/>
+<fullyQualifiedTypeName name="java.security.cert.CertificateException"/>
+<fullyQualifiedTypeName name="javax.net.ssl.TrustManager"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.security.cert.CertificateFactory"/>
+<fullyQualifiedTypeName name="javax.net.ssl.TrustManagerFactory"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="javax.net.ssl.KeyManager"/>
+<fullyQualifiedTypeName name="java.security.SecureRandom"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLSocketFactory"/>
+<fullyQualifiedTypeName name="com.mashape.unirest.http.Unirest"/>
+<fullyQualifiedTypeName name="com.mashape.unirest.http.HttpResponse"/>
+<fullyQualifiedTypeName name="okhttp3.OkHttpClient"/>
+<fullyQualifiedTypeName name="okhttp3.MediaType"/>
+<fullyQualifiedTypeName name="okhttp3.RequestBody"/>
+<fullyQualifiedTypeName name="okhttp3.Request"/>
+<fullyQualifiedTypeName name="okhttp3.Response"/>
+<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+<fullyQualifiedTypeName name="javax.security.cert.Certificate"/>
+<fullyQualifiedTypeName name="java.security.Certificate"/>
+<fullyQualifiedTypeName name="java.security.cert.Certificate"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.OutputStream"/>
+<fullyQualifiedTypeName name="java.net.URLConnection"/>
+<fullyQualifiedTypeName name="javax.net.ssl.X509TrustManager"/>
+<fullyQualifiedTypeName name="java.security.cert.X509Certificate"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLSession"/>
+<fullyQualifiedTypeName name="java.security.KeyStore"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="javax.net.ssl.KeyManagerFactory"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLContext"/>
+<fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
+<fullyQualifiedTypeName name="javax.net.ssl.HttpsURLConnection"/>
+</qualifiedTypeNameHistroy>

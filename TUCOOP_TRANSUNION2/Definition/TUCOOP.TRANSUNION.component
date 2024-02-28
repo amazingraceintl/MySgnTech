@@ -72,3 +72,11 @@ private method sgntTuCreditchkService (
    jBC: SGNT.TU.CREDITCHK.SERVICE
 }
 
+
+
+private method testfico (
+)
+{
+   jBC: TESTFICO
+}
+

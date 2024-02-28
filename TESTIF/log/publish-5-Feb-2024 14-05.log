@@ -1,0 +1,7 @@
+Publish: C:\Users\Peter\Desktop\R22DS\TucoopDev\TESTIF
+**********************************************
+Event Name: Fundstransfer.event
+Contract Name: FUNDS.TRANSFER,
+Exit Point: Input Stage
+Flow Name: TESTIF-FundstransferDetails
+Status : Successfully Published 

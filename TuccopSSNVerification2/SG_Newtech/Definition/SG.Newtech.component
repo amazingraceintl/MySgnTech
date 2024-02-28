@@ -1,0 +1,20 @@
+component SG.Newtech
+# Component Isolation Definition
+metamodelVersion 1.6
+# -------------------------------------------------
+
+
+private method tucoopVrSsnVal (
+)
+{
+    jBC: TUCOOP.VR.SSN.VAL
+}
+
+
+
+private method sgntVrOvrd (
+)
+{
+   jBC: SGNT.VR.OVRD
+}
+

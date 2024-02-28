@@ -1,0 +1,51 @@
+* @ValidationCode : MjoxMDc1MzI3MDQyOkNwMTI1MjoxNzA3NTkwMTE5MzI0OlBldGVyOi0xOi0xOjA6MDpmYWxzZTpOL0E6UjIyX1NQOS4wOi0xOi0x
+* @ValidationInfo : Timestamp         : 10 Feb 2024 19:35:19
+* @ValidationInfo : Encoding          : Cp1252
+* @ValidationInfo : User Name         : Peter
+* @ValidationInfo : Nb tests success  : N/A
+* @ValidationInfo : Nb tests failure  : N/A
+* @ValidationInfo : Rating            : N/A
+* @ValidationInfo : Coverage          : N/A
+* @ValidationInfo : Strict flag       : N/A
+* @ValidationInfo : Bypass GateKeeper : false
+* @ValidationInfo : Compiler Version  : R22_SP9.0
+* @ValidationInfo : Copyright Temenos Headquarters SA 1993-2021. All rights reserved.
+$PACKAGE SG.Newtech
+SUBROUTINE SGNT.VR.OVRD
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+* Modification History :
+*-----------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------
+    $USING EB.DataAccess
+    $USING EB.Foundation
+    $USING EB.TransactionControl
+    $USING EB.ErrorProcessing
+    $USING EB.API
+    $USING EB.SystemTables
+    $USING EB.OverrideProcessing
+    $USING ST.CompanyCreation
+    $USING ST.Customer
+    $USING EB.Updates
+    $USING EB.Display
+    $USING EB.LocalReferences
+    
+    EB.LocalReferences.GetLocRef("CUSTOMER", "SSN.REPLYDETAIL", SsnReplyDetailsPos)
+    ssnRepDet =  EB.SystemTables.getRNew(ST.Customer.Customer.EbCusLocalRef)<1,SsnReplyDetailsPos>
+    OssnRepDet = EB.SystemTables.getROld(ST.Customer.Customer.EbCusLocalRef)<1,SsnReplyDetailsPos>
+    
+    EB.LocalReferences.GetLocRef("CUSTOMER", "SSN.OVRDETAILS", SsnOveridePos)
+    SsnOveride = EB.SystemTables.getRNew(ST.Customer.Customer.EbCusLocalRef)<1,SsnOveridePos>
+    OSsnOveride = EB.SystemTables.getROld(ST.Customer.Customer.EbCusLocalRef)<1,SsnOveridePos>
+    
+    IF OSsnOveride EQ '' THEN
+        IF SsnOveride EQ '' THEN
+            EB.SystemTables.setAf(SsnOveride)
+            EB.SystemTables.setE("Override Reason is mandatory")
+            EB.ErrorProcessing.StoreEndError()
+        END
+    END
+    
+END

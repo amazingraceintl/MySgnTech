@@ -1,0 +1,185 @@
+$PACKAGE TUCOOP.TRANSUNION
+SUBROUTINE TESTFICO
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+* Modification History :
+*-----------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------
+
+    
+    
+    endpoint = "https://netaccess-test.transunion.com";
+    version = '2.40'
+    userRefNumber = ''
+    memberCode = '4883343'
+    inquirySubscriberPrefixCode = '0622'
+    password = 'J2SP'
+    processingEnvironment ='standardTest'
+    country = 'us'
+    language = 'en'
+    code= '07000'
+    addOnProductCode = '00Q88'
+    connectionTimeout = "180"
+    sessionTimeout = "120"
+    industryCode = 'Q'
+    number = '1'
+    firstname ='JANET'
+    middlename = ''
+    lastname = 'BUSCH'
+    street = '4227 N 27TH AV'
+    streetnumber =''
+    city = 'PHOENIX'
+    state = 'AZ'
+    zipcode = '85017'
+    socialSecurity ='666822043'
+    DOB = ''
+    scoreModelProduct = ''
+    returnErrorText = 'true'
+    inquiryECOADesignator ='individual'
+    contractualRelationship = ''
+    
+    payload = '<?xml version="1.0" encoding="UTF-8"?>'
+    payload := '<xmlrequest xmlns="http://www.transunion.com/namespace" xsi:schemaLocation="http://www.transunion.com/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+    payload := '<systemId>COOPER15</systemId>'
+    payload := '<systemPassword>TuC00p25</systemPassword>'
+    payload := '<productrequest>'
+    payload := '<creditBureau xmlns="http://www.transunion.com/namespace">'
+    payload := '<version>':version'</version>'
+    payload := '<document>request</document>'
+    payload := '<transactionControl>'
+    payload :=   '<userRefNumber>':userRefNumber:'</userRefNumber>'
+    payload :=   '<subscriber>'
+    payload :=      '<industryCode>Q</industryCode>'
+    payload :=      '<memberCode>':memberCode:'</memberCode>'
+    payload :=      '<inquirySubscriberPrefixCode>':inquirySubscriberPrefixCode:'</inquirySubscriberPrefixCode>'
+    payload :=      '<password>':password:'</password>'
+    payload :=   '</subscriber>'
+    payload :=   '<options>'
+    payload :=      '<processingEnvironment>':processingEnvironment:'</processingEnvironment>'
+    payload :=      '<country>':country:'</country>'
+    payload :=      '<language>':language:'</language>'
+    payload :=      '<contractualRelationship>':contractualRelationship:'</contractualRelationship>'
+    payload :=      '<pointOfSaleIndicator>none</pointOfSaleIndicator>'
+    payload :=   '</options>'
+    payload := '</transactionControl>'
+    payload :=  '<product>'
+    payload :=     '<code>':code:'</code>'
+    payload :=     '<subject>'
+    payload :=        '<number>':number:'</number>'
+    payload :=        '<subjectRecord>'
+    payload :=           '<indicative>'
+    payload :=             '<name>'
+    payload :=                '<person>'
+    payload :=                  '<first>':firstname:'</first>'
+    payload :=                  '<middle>':middlename:'</middle>'
+    payload :=                  '<last>':lastname:'</last>'
+    payload :=                '</person>'
+    payload :=             '</name>'
+    payload :=             '<address>'
+    payload :=               '<status>current</status>'
+    payload :=               '<street>'
+    payload :=                 '<number>':streetnumber:'</number>'
+    payload :=                 '<name>':street:'</name>'
+    payload :=                 '<preDirectional>W</preDirectional>'
+    payload :=                 '<type>RD</type>'
+    payload :=               '</street>'
+    payload :=               '<location>'
+    payload :=                 '<city>':city:'</city>'
+    payload :=                 '<state>':state:'</state>'
+    payload :=                 '<zipCode>':zipcode:'</zipCode>'
+    payload :=               '</location>'
+    payload :=            '</address>'
+    payload :=            '<socialSecurity>'
+    payload :=              '<number>':socialSecurity:'</number>'
+    payload :=            '</socialSecurity>'
+    payload :=            '<dateOfBirth>':DOB:'</dateOfBirth>'
+    payload :=           '</indicative>'
+    payload :=           '<addOnProduct>'
+    payload :=             '<code>':addOnProductCode:'</code>'
+    payload :=             '<scoreModelProduct>':scoreModelProduct:'</scoreModelProduct>'
+    payload :=           '</addOnProduct>'
+    payload :=         '</subjectRecord>'
+    payload :=      '</subject>'
+    payload :=      '<responseInstructions>'
+    payload :=        '<returnErrorText>':returnErrorText:'</returnErrorText>'
+    payload :=        '<document/>'
+    payload :=      '</responseInstructions>'
+    payload :=      '<permissiblePurpose>'
+    payload :=         '<inquiryECOADesignator>':inquiryECOADesignator:'</inquiryECOADesignator>'
+    payload :=      '</permissiblePurpose>'
+    payload :=   '</product>'
+    payload :='</creditBureau>'
+   
+    t24data = "<?xml version='1.0' encoding='UTF-8'?><xmlrequest xmlns=\"http://www.transunion.com/namespace\" xsi:schemaLocation=\"http://www.transunion.com/namespace\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><systemId>COOPER15</systemId><systemPassword>TuC00p25</systemPassword><productrequest><creditBureau xmlns=\"http://www.transunion.com/namespace\"><version>2.40</version><document>request</document><transactionControl><userRefNumber/><subscriber><industryCode>Q</industryCode><memberCode>4883343</memberCode><inquirySubscriberPrefixCode>0622</inquirySubscriberPrefixCode><password>J2SP</password></subscriber><options><processingEnvironment>standardTest</processingEnvironment><country>us</country><language>en</language></options></transactionControl><product><code>07000</code><subject><number>1</number><subjectRecord><indicative><name><person><first>JANET</first><middle></middle><last>BUSCH</last></person></name><address><status>current</status><street><unparsed>4227 N 27TH AV</unparsed></street><location><city>PHOENIX</city><state>AZ</state><zipCode>85017</zipCode></location></address><socialSecurity><number>666822043</number></socialSecurity><dateOfBirth/></indicative></subjectRecord></subject><responseInstructions><returnErrorText>true</returnErrorText><document/></responseInstructions><permissiblePurpose><inquiryECOADesignator>individual</inquiryECOADesignator></permissiblePurpose></product></creditBureau>"
+   
+   
+    request = endpoint:'^':t24data:'^':"C:/Users/Peter/Music/COOPER15_SHA2.p12"
+  
+    UNQ.NO = "" ; Amt = ''
+* EB.API.AllocateUniqueTime(UNQ.NO)
+    UNQ.NO = EREPLACE(UNQ.NO,".","")
+    SESSION.ID = UNQ.NO[1,12]
+    className = 'SgntEntryPoint'
+    methodName = 'Sender'
+    mypackage = 'com.sgnt.integration'
+
+    DEBUG
+
+    CALLJ mypackage:'.':className, methodName, request SETTING ret ON ERROR
+        GOSUB errorHandler
+        STOP
+    END
+
+    CRT "Received from Java: " : ret
+    CusNo = "Localtest"
+    
+    OpIdreq = CusNo:'-':SESSION.ID:'-request.txt'
+    Fn.Folder = "C:\TEMENOS\TUCOOP\R22\SIT\T24\UD\FICOTUCOOP\LOG"
+    Log.Message = 'Request Sent = ':request:'=============================== Response Received= ':ret
+    
+    OPENSEQ Fn.Folder,OpIdreq TO ReqFolder THEN
+        OPEN.FLAG = 1
+        WEOFSEQ ReqFolder
+    END ELSE
+        CREATE ReqFolder ELSE
+*EB.ErrorProcessing.FatalError("ERROR OPENING FILE POINTER TO ":ReqFolder)
+            RETURN
+        END
+    END
+    
+    WRITESEQ Log.Message TO ReqFolder ELSE
+* EB.ErrorProcessing.FatalError("ERROR WRITING INTO FILE ":OUT.REC)
+    END
+    
+    STOP
+
+errorHandler:
+    err = SYSTEM(0)
+
+    BEGIN CASE
+        CASE err = 1
+            CRT "Fatal Error creating Thread!"
+        CASE err = 2
+            CRT "Cannot find the JVM.dll !"
+        CASE err = 3
+            CRT "Class " : className : " doesn't exist!"
+        CASE err = 4
+            CRT "UNICODE conversion error!"
+        CASE err = 5
+            CRT "Method " : methodName : " doesn't exist!"
+        CASE err = 6
+            CRT "Cannot find object Constructor!"
+        CASE err = 7
+            CRT "Cannot instantiate object!"
+        CASE @TRUE
+            CRT "Unknown error!"
+    END CASE
+
+
+
+END
+
+
+END

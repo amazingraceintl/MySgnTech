@@ -1,5 +1,5 @@
-* @ValidationCode : MjotNTMzNjE2NDYxOkNwMTI1MjoxNzA2NzkzOTQ4MTYxOlBldGVyOi0xOi0xOjA6MDpmYWxzZTpOL0E6UjIyX1NQOS4wOi0xOi0x
-* @ValidationInfo : Timestamp         : 01 Feb 2024 14:25:48
+* @ValidationCode : MjotMzE3NTY1OTQ6Q3AxMjUyOjE3MDcyMDU3NDgwMjA6UGV0ZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMjJfU1A5LjA6LTE6LTE=
+* @ValidationInfo : Timestamp         : 06 Feb 2024 08:49:08
 * @ValidationInfo : Encoding          : Cp1252
 * @ValidationInfo : User Name         : Peter
 * @ValidationInfo : Nb tests success  : N/A
@@ -26,9 +26,8 @@ PROGRAM TESTER
     paramValue =''
 
     CALL EB.LIB.GET.PARAM( paramId, paramName, paramValue, Error )
-    
+     
     CRT 'RESULT IS -': paramValue
     
 RETURN(paramValue)
-END
 END

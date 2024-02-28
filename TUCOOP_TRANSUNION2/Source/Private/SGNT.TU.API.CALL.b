@@ -40,12 +40,14 @@ SUBROUTINE SGNT.TU.API.CALL(args,response)
 RETURN
 
 Process:
+*=======
     GOSUB Init
     GOSUB BuildPayload
     GOSUB ExecuteRequest
 RETURN
+
 Init:
-   
+*====
     paramId = "TRANSUNION"
     endpoint = TUC.Utility.GetParam(paramId, "URL") ;*"http://localhost:8180"
     version = '2.8'
@@ -61,6 +63,9 @@ Init:
     connectionTimeout = TUC.Utility.GetParam(paramId, "connectionTimeout");*"180"
     sessionTimeout = TUC.Utility.GetParam(paramId, "sessionTimeout");*"120"
     industryCode = TUC.Utility.GetParam(paramId, "INDUSTRY.CODE");* Q
+    status = 'current'
+    systemId ='COOPER15'
+    systemPassword = 'TuC00p25'
     
     number = '1'
     firstname = args<1>
@@ -71,90 +76,65 @@ Init:
     city = args<6>
     state = args<7>
     zipcode = args<8>;*'60750';*args<5>
-    socialSecurity = args<9>;*'666125812';*args<7>
+    socialSecurityNo = args<9>;*'666125812';*args<7>
     DOB = args<10>;*"1967-04-17"
     scoreModelProduct = 'true'
     returnErrorText = 'true'
     inquiryECOADesignator = "individual";*'individual'
     contractualRelationship = "individual";*'individual or Joint'
-    
 RETURN
 
+
 BuildPayload:
+*===========
+    payload = "<?xml version='1.0' encoding='UTF-8'?><xmlrequest xmlns="
+    payload := '"http://www.transunion.com/namespace" xsi:schemaLocation='
+    payload := '"http://www.transunion.com/namespace" xmlns:xsi='
+    payload := '"http://www.w3.org/2001/XMLSchema-instance">'
+    payload := '<systemId>':systemId:'</systemId><systemPassword>':systemPassword:'</systemPassword><productrequest><creditBureau '
+    payload := 'xmlns="http://www.transunion.com/namespace">'
+    payload := '<version>':version:'</version><document>request</document><transactionControl>'
+    payload := '<userRefNumber/><subscriber><industryCode>':industryCode:'</industryCode>'
+    payload := '<memberCode>':memberCode:'</memberCode>'
+    payload := '<inquirySubscriberPrefixCode>':inquirySubscriberPrefixCode:'</inquirySubscriberPrefixCode>'
+    payload := '<password>':password:'</password>'
+    payload := '</subscriber><options><processingEnvironment>':processingEnvironment:'</processingEnvironment>'
+    payload := '<country>':country:'</country><language>':language:'</language>'
+    payload :='</options></transactionControl><product><code>':code:'</code><subject><number>':number:'</number>'
+    payload :='<subjectRecord><indicative><name><person><first>':firstname:'</first>'
+    payload :='<middle/><last>':lastname:'</last></person></name><address>'
+    payload :='<status>':status:'</status>'
+    payload :='<street><unparsed>':street:'</unparsed></street>'
+    payload :='<location><city>':city:'</city><state>':state:'</state><zipCode>':zipcode:'</zipCode></location>'
+    payload :='</address> <socialSecurity><number>':socialSecurityNo:'</number></socialSecurity>'
+    payload :='<dateOfBirth/></indicative>'
+    payload :='</subjectRecord></subject><responseInstructions><returnErrorText>':returnErrorText:'</returnErrorText><document/></responseInstructions>'
+    payload :='<permissiblePurpose><inquiryECOADesignator>':inquiryECOADesignator:'</inquiryECOADesignator></permissiblePurpose></product></creditBureau>'
    
-    payload = '<?xml version="1.0"?>'
-    payload := '<creditBureau xmlns="http://www.transunion.com/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-    payload := '<document>request</document>'
-    payload := '<version>':version:'</version>'
-    payload := '<transactionControl>'
-    payload :=   '<userRefNumber>':userRefNumber:'</userRefNumber>'
-    payload :=   '<subscriber>'
-    payload :=      '<industryCode>':industryCode:'</industryCode>'
-    payload :=      '<memberCode>':memberCode:'</memberCode>'
-    payload :=      '<inquirySubscriberPrefixCode>':inquirySubscriberPrefixCode:'</inquirySubscriberPrefixCode>'
-    payload :=      '<password>':password:'</password>'
-    payload :=   '</subscriber>'
-    payload :=   '<options>'
-    payload :=      '<processingEnvironment>':processingEnvironment:'</processingEnvironment>'
-    payload :=      '<country>':country:'</country>'
-    payload :=      '<language>':language:'</language>'
-    payload :=      '<contractualRelationship>':contractualRelationship:'</contractualRelationship>'
-    payload :=      '<pointOfSaleIndicator>none</pointOfSaleIndicator>'
-    payload :=   '</options>'
-    payload := '</transactionControl>'
-    payload :=  '<product>'
-    payload :=     '<code>':code:'</code>'
-    payload :=     '<subject>'
-    payload :=        '<number>':number:'</number>'
-    payload :=        '<subjectRecord>'
-    payload :=           '<indicative>'
-    payload :=             '<name>'
-    payload :=                '<person>'
-    payload :=                  '<first>':firstname:'</first>'
-    payload :=                  '<middle>':middlename:'</middle>'
-    payload :=                  '<last>':lastname:'</last>'
-    payload :=                '</person>'
-    payload :=             '</name>'
-    payload :=             '<address>'
-    payload :=               '<status>current</status>'
-    payload :=               '<street>'
-    payload :=                 '<number>':streetnumber:'</number>'
-    payload :=                 '<name>':street:'</name>'
-    payload :=                 '<preDirectional>W</preDirectional>'
-    payload :=                 '<type>RD</type>'
-    payload :=               '</street>'
-    payload :=               '<location>'
-    payload :=                 '<city>':city:'</city>'
-    payload :=                 '<state>':state:'</state>'
-    payload :=                 '<zipCode>':zipcode:'</zipCode>'
-    payload :=               '</location>'
-    payload :=            '</address>'
-    payload :=            '<socialSecurity>'
-    payload :=              '<number>':socialSecurity:'</number>'
-    payload :=            '</socialSecurity>'
-    payload :=            '<dateOfBirth>':DOB:'</dateOfBirth>'
-    payload :=           '</indicative>'
-    payload :=           '<addOnProduct>'
-    payload :=             '<code>':addOnProductCode:'</code>'
-    payload :=             '<scoreModelProduct>':scoreModelProduct:'</scoreModelProduct>'
-    payload :=           '</addOnProduct>'
-    payload :=         '</subjectRecord>'
-    payload :=      '</subject>'
-    payload :=      '<responseInstructions>'
-    payload :=        '<returnErrorText>':returnErrorText:'</returnErrorText>'
-    payload :=        '<document/>'
-    payload :=      '</responseInstructions>'
-    payload :=      '<permissiblePurpose>'
-    payload :=         '<inquiryECOADesignator>':inquiryECOADesignator:'</inquiryECOADesignator>'
-    payload :=      '</permissiblePurpose>'
-    payload :=   '</product>'
-    payload :='</creditBureau>'
-    request = "endPoint*":endpoint:"|connectionTimeout*":connectionTimeout:"|sessionTimeout*":sessionTimeout:"|headers*Content-Type: application/xml|payload*":payload:"|requestType*postRequest";
+    IF socialSecurityNo EQ '' THEN
+        payloadinit = FIELD(payload,'<socialSecurity><number>',1)
+        payloadinit2 = FIELD(payload,'<socialSecurity><number>',2)
+        payload3 = FIELD(payloadinit2,'</number></socialSecurity>',2,9999)
+        payload = payloadinit:'<socialSecurity/>':payload3
+    END
+
+    IF DOB EQ '' THEN
+        payloaddob = FIELD(payload,'<dateOfBirth>',1)
+        payloaddob2 = FIELD(payload,'<dateOfBirth>',2)
+        payloaddob3 = FIELD(payloaddob2,'</dateOfBirth>',2,9999)
+        payload = payloaddob:'<dateOfBirth/>':payloaddob3
+    
+    END
+   
+    Inparam = endpoint:'^':payload
 RETURN
 
 ExecuteRequest:
-    TUCOOP.TRANSUNION.InvokeHttpClient(request, response)
-
-    PRINT response
+*=============
+* className = 'SgntEntryPoint' ; methodName = 'Sender' ;  mypackage = 'com.sgnt.integration' ;
+    ApiId = 'SGNT.INTERFACE.FICO'
+    EB.SystemTables.CallJavaApi(ApiId,Inparam,response,TError)
+    
+    CRT response
 RETURN
 END

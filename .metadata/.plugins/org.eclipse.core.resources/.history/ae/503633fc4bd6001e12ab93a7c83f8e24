@@ -1,0 +1,122 @@
+* @ValidationCode : MjoxNTIyMzE0NTkyOkNwMTI1MjoxNzA2Nzc3NjczMzMxOlBldGVyOi0xOi0xOjA6MDpmYWxzZTpOL0E6UjIyX1NQOS4wOi0xOi0x
+* @ValidationInfo : Timestamp         : 01 Feb 2024 09:54:33
+* @ValidationInfo : Encoding          : Cp1252
+* @ValidationInfo : User Name         : Peter
+* @ValidationInfo : Nb tests success  : N/A
+* @ValidationInfo : Nb tests failure  : N/A
+* @ValidationInfo : Rating            : N/A
+* @ValidationInfo : Coverage          : N/A
+* @ValidationInfo : Strict flag       : N/A
+* @ValidationInfo : Bypass GateKeeper : false
+* @ValidationInfo : Compiler Version  : R22_SP9.0
+* @ValidationInfo : Copyright Temenos Headquarters SA 1993-2021. All rights reserved.
+$PACKAGE TUCOOP.TRANSUNION
+$USING EB.SystemTables
+$USING TUC.Utility
+SUBROUTINE SGNT.TU.API.CALL(args,response)
+*-----------------------------------------------------------------------------
+*
+*-----------------------------------------------------------------------------
+* Modification History :
+*
+*args<1> = First Name
+*args<2> = Middle Name
+*args<3> = Last Name
+*args<4> = Street
+*args<5> = Street Number
+*args<6> = City
+*args<7> = State
+*args<8> = Zip Code
+*args<9> = Social Security
+*args<10> = Date Of Birth
+*args<11> = Customer Type
+*
+*-----------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------
+
+    response = " "
+    GOSUB Process:
+RETURN
+
+Process:
+    GOSUB Init
+    GOSUB BuildPayload
+    GOSUB ExecuteRequest
+RETURN
+Init:
+   
+    paramId = "TRANSUNION"
+    endpoint = TUC.Utility.GetParam(paramId, "URL") ;*"http://localhost:8180"
+    version = '2.8'
+    userRefNumber = TUC.Utility.GetParam(paramId, "USER.REF.NUMBER");*'20999'
+    memberCode = TUC.Utility.GetParam(paramId, "MEMBER.CODE");*'4883343'
+    inquirySubscriberPrefixCode = TUC.Utility.GetParam(paramId, "INQUIRY.SUBSCRIBER.PREFIX.CODE");*'0622'
+    password = TUC.Utility.GetParam(paramId, "PASSWORD");*'J2SP'
+    processingEnvironment = TUC.Utility.GetParam(paramId, "PROCESSING.ENVIRONMENT");*'standardTest'; *production/standardTest
+    country = TUC.Utility.GetParam(paramId, "COUNTRY");*'us' ;*us/canada
+    language = TUC.Utility.GetParam(paramId, "LANGUAGE");* en/sp/fr
+    code= TUC.Utility.GetParam(paramId, "PRODUCT.CODE");*'07000'
+    addOnProductCode = TUC.Utility.GetParam(paramId, "FICO.SCORE.PRODUCT.CODE");*'00Q88'
+    connectionTimeout = TUC.Utility.GetParam(paramId, "connectionTimeout");*"180"
+    sessionTimeout = TUC.Utility.GetParam(paramId, "sessionTimeout");*"120"
+    industryCode = TUC.Utility.GetParam(paramId, "INDUSTRY.CODE");* Q
+    status = 'current'
+    systemId ='COOPER15'
+    systemPassword = 'TuC00p25'
+    
+    number = '1'
+    firstname = args<1>
+    middlename = args<2>
+    lastname = args<3>
+    street = args<4>
+    streetnumber = args<5>
+    city = args<6>
+    state = args<7>
+    zipcode = args<8>;*'60750';*args<5>
+    socialSecurityNo = args<9>;*'666125812';*args<7>
+    DOB = args<10>;*"1967-04-17"
+    scoreModelProduct = 'true'
+    returnErrorText = 'true'
+    inquiryECOADesignator = "individual";*'individual'
+    contractualRelationship = "individual";*'individual or Joint'
+    
+    
+RETURN
+
+BuildPayload:
+    payload = "<?xml version='1.0' encoding='UTF-8'?><xmlrequest xmlns="
+    payload := '"http://www.transunion.com/namespace" xsi:schemaLocation='
+    payload := '"http://www.transunion.com/namespace" xmlns:xsi='
+    payload := '"http://www.w3.org/2001/XMLSchema-instance">'
+    payload := '<systemId>':systemId:'</systemId><systemPassword>':systemPassword:'</systemPassword><productrequest><creditBureau '
+    payload := 'xmlns="http://www.transunion.com/namespace">'
+    payload := '<version>':version:'</version><document>request</document><transactionControl>'
+    payload := '<userRefNumber/><subscriber><industryCode>':industryCode:'</industryCode>'
+    payload := '<memberCode>':memberCode:'</memberCode>'
+    payload := '<inquirySubscriberPrefixCode>':inquirySubscriberPrefixCode:'</inquirySubscriberPrefixCode>'
+    payload := '<password>':password:'</password>'
+    payload := '</subscriber><options><processingEnvironment>':processingEnvironment:'</processingEnvironment>'
+    payload := '<country>':country:'</country><language>':language:'</language>'
+    payload :='</options></transactionControl><product><code>':code:'</code><subject><number>':number:'</number>'
+    payload :='<subjectRecord><indicative><name><person><first>':firstname:'</first>'
+    payload :='<middle/><last>':lastname:'</last></person></name><address>'
+    payload :='<status>':status:'</status>'
+    payload :='<street><unparsed>':street:'</unparsed></street>'
+    payload :='<location><city>':city:'</city><state>':state:'</state><zipCode>':zipcode:'</zipCode></location>'
+    payload :='</address><socialSecurity><number>':socialSecurityNo:'</number></socialSecurity>'
+    payload :='<dateOfBirth/></indicative>'
+    payload :='</subjectRecord></subject><responseInstructions><returnErrorText>':returnErrorText:'</returnErrorText><document/></responseInstructions>'
+    payload :='<permissiblePurpose><inquiryECOADesignator>':inquiryECOADesignator:'</inquiryECOADesignator></permissiblePurpose></product></creditBureau>'
+   
+   
+    Inparam = endpoint:'^':payload
+RETURN
+
+ExecuteRequest:
+    className = 'SgntEntryPoint' ; methodName = 'Sender' ;  mypackage = 'com.sgnt.integration' ; ApiId = 'SGNT.INTERFACE.FICO'
+    EB.SystemTables.CallJavaApi(ApiId,Inparam,response,TError)
+    
+    PRINT response
+RETURN
+END

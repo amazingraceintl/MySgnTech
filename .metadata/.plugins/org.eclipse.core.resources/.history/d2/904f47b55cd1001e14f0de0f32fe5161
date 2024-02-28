@@ -1,0 +1,146 @@
+package com.sgnt.integration;
+import java.io.IOException;
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+/**
+ * TODO: Document me!
+ *
+ * @author Peter
+ *
+ */
+
+
+    /**
+     * @param args
+     */
+
+
+/**
+ * TODO: Document me!
+ *
+ * @author Ajayi
+ *
+ */
+public class Sender {
+    private URLConnection urlc = null;
+    private HttpURLConnection con = null;
+    public static String json;
+    private static String request;
+    public static String tmp;
+    public String data;
+    public static String address = "https://netaccess-test.transunion.com";
+
+    public static void main(String[] args) throws Exception, MalformedURLException, IOException {
+    System.setProperty("javax.net.ssl.trustStore","bpr.keystore");
+        System.setProperty("javax.net.ssl.trustStorePassword","abcd1234");
+    
+        
+        //String t24data = args.toString();
+        String t24data = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n<xmlrequest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope\" xmlns=\"http://www.netaccess.transunion.com/namespace\">\r\n    <systemId>COOPER15</systemId>\r\n    <systemPassword>TuC00p25</systemPassword>\r\n    <productrequest>\r\n        <creditBureau xmlns=\"http://www.transunion.com/namespace\">\r\n            <document>request</document>\r\n            <version>2.0</version>\r\n            <transactionControl>\r\n                <userRefNumber>XYZ_123_APPLICATION_328</userRefNumber>\r\n                <subscriber>\r\n                    <industryCode>Q</industryCode>\r\n                    <memberCode>4883343</memberCode>\r\n                    <inquirySubscriberPrefixCode>0622</inquirySubscriberPrefixCode>\r\n                    <password>PSWD</password>\r\n                </subscriber>\r\n                <options>\r\n                    <processingEnvironment>production</processingEnvironment>\r\n                    <country>us</country>\r\n                    <language>en</language>\r\n                    <contractualRelationship>individual</contractualRelationship>\r\n                    <pointOfSaleIndicator>none</pointOfSaleIndicator>\r\n                </options>\r\n            </transactionControl>\r\n            <product>\r\n                <code>07350</code>\r\n                <subject>\r\n                    <number>1</number>\r\n                    <subjectRecord>\r\n                        <indicative>\r\n                            <name>\r\n                                <person>\r\n                                    <alsoReportedAs>false</alsoReportedAs>\r\n                                    <first>ALANA</first>\r\n                                    <middle />\r\n                                    <last>FILE</last>\r\n                                    <generationalSuffix />\r\n                                </person>\r\n                            </name>\r\n                            <address>\r\n                                <status>current</status>\r\n                                <street>\r\n                                    <unparsed>5TH ST</unparsed>\r\n                                </street>\r\n                                <location>\r\n                                    <city>FANTASY ISLAND</city>\r\n                                    <state>IL</state>\r\n                                    <zipCode>60750</zipCode>\r\n                                </location>\r\n                            </address>\r\n                            <socialSecurity>\r\n                                <number>892462577</number>\r\n                            </socialSecurity>\r\n                            <dateOfBirth>1910-01-01</dateOfBirth>\r\n                            <phone>\r\n                                <number>\r\n                                    <type>standard</type>\r\n                                    <areaCode>123</areaCode>\r\n                                    <exchange>456</exchange>\r\n                                    <suffix>7890</suffix>\r\n                                </number>\r\n                            </phone>\r\n                        </indicative>\r\n                    </subjectRecord>\r\n                </subject>\r\n            </product>\r\n        </creditBureau>\r\n    </productrequest>\r\n</xmlrequest>";
+
+
+        System.out.println("generating json");
+        System.out.println("Data to use "+t24data);
+        SendTOCP(t24data);
+
+    }
+    
+
+    public static String SendTOCP(String data) throws Exception{
+
+        String[] temp = data.split("\\*");
+        String tmp = temp[0];
+        String bum = null;
+        
+        Sender post = new Sender();
+      
+        System.out.println("tmp only:===> " + tmp);
+        json = post.callRestfulWebService(request, tmp);
+        
+        return bum;
+        }
+       
+        
+            
+
+        private String callRestfulWebService(String parameter1, String parameter2) throws Exception {
+
+           String response = null;
+            PrintStream ps = null;
+            BufferedReader br = null;
+                    String line;
+            try {
+                
+               // String address = LoadProperties.getProperty("Url") + parameter2;
+                String fulladdress = address + parameter2;
+                
+                URL url = null;
+                url = new URL(fulladdress);
+
+                boolean justOpenConnect = false;
+                if (this.urlc == null) {
+                    this.con = (HttpsURLConnection) url.openConnection();
+                    this.con.setRequestMethod("POST");
+                    justOpenConnect = true;
+                }
+
+                if (justOpenConnect) {
+                    String encoding = null;
+                    this.con.setRequestProperty("Content-Type", "text/xml");
+                    //this.con.setRequestProperty("Authorization", "Basic dDI0dXNlcjp0MjR1c2VyMTIz");
+                    this.con.setDoInput(true);
+                    this.con.setUseCaches(false);
+                    this.con.setDoOutput(true);
+                    this.con.setAllowUserInteraction(false);
+                    this.con.connect();
+                }
+
+                ps = new PrintStream(this.con.getOutputStream());
+                ps.print(parameter1);
+                ps.close();
+                br = new BufferedReader(new InputStreamReader(this.con.getInputStream(), StandardCharsets.UTF_8));
+                StringBuilder sb = new StringBuilder();
+                if (br == null) {
+              
+                    line = null;
+                } else {
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                        sb.append("\n");
+                    }
+
+                    br.close();
+                    response = sb.toString();
+                    return response;
+                }
+
+            } catch (Exception var20) {
+            
+                System.out.println(var20);
+                return response;
+            } finally {
+                if (ps != null) {
+                    ps = null;
+                }
+
+                if (br != null) {
+                    br = null;
+                }
+
+                if (this.urlc != null) {
+                    this.urlc = null;
+                }
+
+            }
+
+            return "";
+        }
+}
+
